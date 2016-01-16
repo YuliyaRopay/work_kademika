@@ -129,14 +129,14 @@ public class BirdsStoreUI {
         JPanel tablePanel =new JPanel();
 
         SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yy HH:mm:ss");
-        String[] columnNames={"ID","Date","Product","Count","Customer"};
+        String[] columnNames={"Date","Bird","Count","Customer "};
         List<Transaction> transactions=store.getTransactionList();
         Object [][] data =new Object[transactions.size()][];
         for(int i=0; i<transactions.size(); i++){
             Transaction t=transactions.get(i);
-            Object[] co=new Object[] {sdf.format(t.getCalendar().getTime()),t.getBird().getName(),t.getCount(),
+            Object[] object=new Object[] {sdf.format(t.getCalendar().getTime()),t.getBird().getName(),t.getCount(),
                     t.getCustomer().getFirstName(),t.getCustomer().getLastName()};
-            data[i]=co;
+            data[i]=object;
         }
 
         tTransactions=new JTable(data, columnNames);
