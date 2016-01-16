@@ -1,5 +1,6 @@
 package birds;
 
+
 import java.util.*;
 
 public class Launcher {
@@ -72,6 +73,13 @@ public class Launcher {
         System.out.println(">>>-----------");
         System.out.println("> List of Birds after transactions:");
         store.printAllBirdsList();
+
+
+
+        System.out.println(">>>-----------");
+        System.out.println("> Swing:");
+        BirdsStoreUI storeUI=new BirdsStoreUI(store);
+
 
 
     }
