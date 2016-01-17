@@ -16,27 +16,104 @@ public class BirdsStoreUI {
 
     private BirdsStore store;
     //private List<Customer> customerList;
-    private JTable tTransactions;
+    private JFrame frame;
+    private JTable transactionsTable;
 
     public BirdsStoreUI(BirdsStore store){
         this.store=store;
 
-        JFrame frame=new JFrame();
+        frame=new JFrame("Shop selling birds");
         frame.setMinimumSize(new Dimension(600,400));
         frame.setLocation(150,150);
 
+        //menu
+
+        final JMenuItem menuItemBuyBirds =new JMenuItem("Buy birds");
+        final JMenuItem menuItemViewSale =new JMenuItem("View sale");
+        final JMenuItem menuItemExit =new JMenuItem("Exit");
+
+
+        menuItemBuyBirds.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSellingForm();
+                menuItemBuyBirds.setVisible(false);
+                menuItemViewSale.setVisible(true);
+            }
+        });
+
+
+        menuItemViewSale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showTableForm();
+                menuItemViewSale.setVisible(false);
+                menuItemBuyBirds.setVisible(true);
+            }
+        });
+
+        menuItemExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                System.exit(0);
+            }
+        });
+
+        JMenuBar menuBar=new JMenuBar();
+        menuBar.add(menuItemBuyBirds).setVisible(false);
+        menuBar.add(menuItemViewSale);
+        //menuBar.add(menuItemExit);
+        frame.getRootPane().setJMenuBar(menuBar);
+
+        /*
+        JMenuItem menuItemBuyBirds =new JMenuItem("Buy birds");
+        menuItemBuyBirds.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showSellingForm();
+            }
+        });
+
+        JMenu mainMenu=new JMenu("file");
+        JMenu mainMenu2=new JMenu("file2");
+        mainMenu.add(menuItemBuyBirds);
+
+        JMenuBar menuBar=new JMenuBar();
+        menuBar.add(mainMenu);
+        menuBar.add(mainMenu2);
+        frame.getRootPane().setJMenuBar(menuBar);
+*/
         //frame.getContentPane().add(createSellingPanel());
-        frame.getContentPane().add(createTablePanel());
+       //frame.getContentPane().add(createTablePanel());
+
+
+        frame.getContentPane().add(createSellingPanel());
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
 
+    private void showSellingForm(){
+        frame.getContentPane().removeAll();
+        //createTablePanel();
+        frame.getContentPane().add(createSellingPanel());
+        frame.pack();
+        frame.repaint();
+    }
+
+    private void showTableForm(){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(createTablePanel());
+        frame.pack();
+        frame.repaint();
+    }
+
+    //
     private JPanel createSellingPanel(){
         JPanel mainPanel =new JPanel();
         mainPanel.setLayout(new GridBagLayout());
-
 
         //
         JLabel labelCustomer=new JLabel("Customer name: ");
@@ -116,7 +193,7 @@ public class BirdsStoreUI {
 
                 store.soldBirds(customer,strBird,count);
                 System.out.println(strBird);
-
+                showTableForm();
             }
         });
 
@@ -124,7 +201,9 @@ public class BirdsStoreUI {
         return mainPanel;
     }
 
+    //
     private JPanel createTablePanel(){
+
 
         JPanel tablePanel =new JPanel();
 
@@ -139,10 +218,10 @@ public class BirdsStoreUI {
             data[i]=object;
         }
 
-        tTransactions=new JTable(data, columnNames);
-        tTransactions.getColumnModel().getColumn(1).setPreferredWidth(120);
+        transactionsTable=new JTable(data, columnNames);
+        transactionsTable.getColumnModel().getColumn(1).setPreferredWidth(120);
 
-        JScrollPane sp=new JScrollPane(tTransactions);
+        JScrollPane sp=new JScrollPane(transactionsTable);
         tablePanel.add(sp);
 
         return tablePanel;
