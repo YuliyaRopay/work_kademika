@@ -1,6 +1,7 @@
 package day10;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class BirdBox<T extends Bird>{
@@ -23,7 +24,13 @@ public class BirdBox<T extends Bird>{
         birds.remove(bird);
     }
 
-
-
-
+    public void sortByName(){
+        birds.sort(new Comparator<T>() {
+                       @Override
+                       public int compare(T o1, T o2) {
+                           return (o1.getName().compareTo(o2.getName()));
+                       }
+                   }
+        );
+    }
 }
