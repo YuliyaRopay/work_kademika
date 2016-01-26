@@ -6,6 +6,7 @@ public class Duck extends Bird{
     private String color;
 
     public Duck() {
+        color="yellow";
     }
 
     public String getColor() {
