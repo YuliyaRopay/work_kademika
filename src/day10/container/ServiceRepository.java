@@ -23,4 +23,8 @@ public class ServiceRepository<T extends Service> {
     public List<T> getService(){
         return services;
     }
+
+    public int getSize(){
+        return services.size();
+    }
 }

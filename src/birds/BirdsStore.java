@@ -11,6 +11,11 @@ public class BirdsStore {
     private List<Customer> customerList;
     private List<Transaction> transactionList;
 
+    public BirdsStore() {
+
+    }
+
+
     public BirdsStore(String name) {
         this.name = name;
         birdsList=new ArrayList<Bird>();
@@ -169,6 +174,19 @@ public class BirdsStore {
             return true;
         }
          return false;
+    }
+
+
+    public double getDiscountPrice(double price){
+
+        if(price>=50 && price<1000){
+            price=price*0.05;
+        }
+        else if(price>=1000){
+            price=price*0.1;
+        }
+
+        return price;
     }
 
 
