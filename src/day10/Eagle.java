@@ -15,4 +15,9 @@ public class Eagle extends Bird{
     public void setAge(int age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return "["+super.getId()+" : "+super.getName()+" : "+age+" : "+super.getPrice()+" ]";
+    }
 }

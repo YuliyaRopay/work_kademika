@@ -28,17 +28,21 @@ public class LauncherBirds {
         System.out.println();
         printClassFields(duck.getClass());
 
+        System.out.println();
         System.out.println(">init");
         Map<String, Object> dataForClass=new HashMap<String, Object>();
         dataForClass.put("setName","EagleNew");
+        dataForClass.put("setAge",4);
         dataForClass.put("setId",12L);
         dataForClass.put("setPrice",300);
-        dataForClass.put("setAge",4);
-        CreateClass newClass=new CreateClass();
-        newClass.initClass(Eagle.class, dataForClass);
 
+        CreateClass newClass=new CreateClass();
+        Eagle eagleNew= (Eagle) newClass.initClass(Eagle.class, dataForClass);
+
+        System.out.println(eagleNew.toString());
 
     }
+
 
     public static void printClassInfo(Class classPrint){
         System.out.println("> Class Info: ");
