@@ -7,7 +7,9 @@ import day10.Eagle;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LauncherBirds {
@@ -29,7 +31,7 @@ public class LauncherBirds {
         printClassFields(duck.getClass());
 
         System.out.println();
-        System.out.println(">init");
+        System.out.println("> init class");
         Map<String, Object> dataForClass=new HashMap<String, Object>();
         dataForClass.put("setName","EagleNew");
         dataForClass.put("setAge",4);
@@ -38,9 +40,19 @@ public class LauncherBirds {
 
         CreateClass newClass=new CreateClass();
         Eagle eagleNew= (Eagle) newClass.initClass(Eagle.class, dataForClass);
-
         System.out.println(eagleNew.toString());
 
+
+        System.out.println();
+        System.out.println("> init class by constructor");
+        List<Object> paramList=new ArrayList<>();
+        paramList.add(24L);
+        paramList.add("EagleNew2");
+        paramList.add(600D);
+        paramList.add(8);
+
+        Eagle eagleNew2= (Eagle) newClass.initClass(Eagle.class, paramList);
+        System.out.println(eagleNew2.toString());
     }
 
 

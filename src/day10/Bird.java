@@ -6,6 +6,19 @@ public abstract class Bird {
     private String name;
     private double price;
 
+    public Bird() {
+    }
+
+    public Bird(long id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Bird(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public long getId() {
         return id;
