@@ -1,6 +1,7 @@
 package day10.reflaction;
 
 
+import day10.Bird;
 import day10.Duck;
 import day10.Eagle;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class LauncherBirds {
 
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 
         Duck duck =new Duck();
         Eagle eagle=new Eagle();
@@ -53,6 +54,17 @@ public class LauncherBirds {
 
         Eagle eagleNew2= (Eagle) newClass.initClass(Eagle.class, paramList);
         System.out.println(eagleNew2.toString());
+
+
+        System.out.println();
+        System.out.println("> set private fields");
+        Bird eaglePrivate=new Eagle();
+        Map<String, Object> dataForPrivateFields=new HashMap<String, Object>();
+
+        dataForPrivateFields.put("age",1);
+        setPrivates(eaglePrivate,dataForPrivateFields);
+        System.out.println(eaglePrivate.toString());
+
     }
 
 
@@ -80,5 +92,16 @@ public class LauncherBirds {
         }
     }
 
+    public static void setPrivates(Object object, Map<String,Object> mapList) throws NoSuchFieldException, IllegalAccessException {
 
+        for(String keyInit: mapList.keySet()){
+
+            //System.out.println(keyInit+"="+mapList.get(keyInit));
+            Field field=object.getClass().getDeclaredField(keyInit);
+            //System.out.println("field="+field.getName());
+            field.setAccessible(true);
+            field.set(object,mapList.get(keyInit));
+
+        }
+    }
 }
