@@ -30,4 +30,9 @@ public class ServiceNew {
     public void setInt1(int int1) {
         this.int1 = int1;
     }
+
+    @initServiceAnnotation
+    public void init(){
+        System.out.println("starting init method...");
+    }
 }
