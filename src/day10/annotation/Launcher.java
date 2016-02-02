@@ -8,13 +8,13 @@ public class Launcher {
 
         ApplicationManager am=new ApplicationManager();
 
-        am.run(ServiceNew.class);
-
-        System.out.println();
-        System.out.println();
-
         am.run(Service.class);
 
+        System.out.println();
+        System.out.println();
+
+        am.run(ServiceNew.class);
+        System.out.println("create new= "+am.getService(ServiceNew.class).getClass().getName());
 
     }
 

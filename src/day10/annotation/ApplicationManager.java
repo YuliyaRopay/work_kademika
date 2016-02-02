@@ -41,5 +41,9 @@ public class ApplicationManager {
     }
 
 
+    public <T> T getService(Class<T> c) throws IllegalAccessException, InstantiationException {
+      return c.newInstance();
+    }
+
 }
 
