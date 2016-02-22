@@ -10,6 +10,7 @@ public class CopyFile {
         copyFile.copyFile("data.txt", "data_copy.txt");
         copyFile.streamCopyFile("data.txt", "data_stream_copy.txt");
         copyFile.streamCopyFile2("data.txt", "data_stream_copy2.txt");
+        copyFile.bufferedCopyFile("data.txt", "data_buffered_copy.txt");
 
     }
 
@@ -64,4 +65,27 @@ public class CopyFile {
         e.printStackTrace();
         }
     }
+
+    //
+    public void bufferedCopyFile(String fileOriginName, String fileCopyName){
+
+        StringBuilder builder = new StringBuilder();
+
+        try(    FileInputStream fileIS = new FileInputStream(fileOriginName);
+                BufferedInputStream bufferedIS =new BufferedInputStream(fileIS,256);
+                FileOutputStream fileOS = new FileOutputStream(fileCopyName);
+                BufferedOutputStream bufferedOS=new BufferedOutputStream(fileOS,256); ){
+
+            int i;
+            while((i=bufferedIS.read())!=-1){
+                bufferedOS.write((char) i);
+
+            }
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
