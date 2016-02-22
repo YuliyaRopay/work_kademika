@@ -16,7 +16,7 @@ public class JDKReader implements FileReader{
                 FileInputStream fis= new FileInputStream(fileName);
                 InputStreamReader reader= new InputStreamReader(fis);
                 //InputStreamReader reader= new InputStreamReader(fis, StandardCharsets.ISO_8859_1);
-                java.io.BufferedReader bufferedReader=new BufferedReader(reader);
+                BufferedReader bufferedReader=new BufferedReader(reader);
                 )
         {
             String str;
