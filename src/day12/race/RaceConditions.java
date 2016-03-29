@@ -13,13 +13,30 @@ public class RaceConditions
         long husband =1122;
         long wife=2211;
 
-        //Atm atm=new GoodAtm();
+       // Atm atm=new GoodAtm();
+        Atm atm=new BadAtm();
 
         Set<Runnable> threads= new HashSet<>();
         for(int i=0;i<50;i++){
+            threads.add(createWithdrawalThread(atm,wife, random.nextInt(1000)));
+            threads.add(createWithdrawalThread(atm,husband, random.nextInt(1000)));
 
         }
 
+        for(Runnable r:threads){
+            new Thread(r).start();
+        }
+    }
+
+
+    private static  Runnable createWithdrawalThread(final Atm atm, final long accountId, final int amount){
+        return new Runnable() {
+            @Override
+            public void run() {
+                atm.checkBalance(accountId);
+                atm.withDrawMoney(accountId, amount);
+            }
+        };
 
     }
 }
