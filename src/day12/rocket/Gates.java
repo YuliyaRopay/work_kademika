@@ -13,6 +13,8 @@ public class Gates {
 
     public int openTopX=10;
     public int openBottomX=350;
+    public int closeTopX=95;
+    public int closeBottomX=280;
 
     public boolean isOpen=false;
 

@@ -19,6 +19,7 @@ public class StartRocket extends JPanel{
     private Image imageBaum2;
     private Rocket rocket;
     private Gates gates;
+    private boolean stopRocket=false;
 
 
     public StartRocket(){
@@ -26,7 +27,7 @@ public class StartRocket extends JPanel{
         setAllImages();
 
         JFrame frame= new JFrame("STARGATE");
-        frame.setLocation(450,150);
+        frame.setLocation(450,100);
         frame.setMinimumSize(new Dimension(600,600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(this);
@@ -92,7 +93,7 @@ public class StartRocket extends JPanel{
                         gates.wait();
                     }
 
-                    while(!gates.isOpen){
+                    while (!stopRocket){
                         animateGates();
                     }
 
@@ -141,6 +142,21 @@ public class StartRocket extends JPanel{
                 sleep(15);
             }
         }
+
+
+        if(gates.isOpen){
+            if(gates.topX<=gates.closeTopX){
+                gates.topX++;
+            }
+            if(gates.bottomX>=gates.closeBottomX){
+                gates.bottomX--;
+            }
+            if(gates.topX==gates.closeTopX){
+                stopRocket=true;
+            }
+            sleep(25);
+        }
+
     }
 
 
@@ -156,6 +172,12 @@ public class StartRocket extends JPanel{
                 }
             }
 
+            if(gates.isOpen && isRocketFlewGates()){
+                 synchronized (gates){
+                    gates.notify();
+                }
+            }
+
             rocket.y--;
             sleep(5);
         }
@@ -165,6 +187,11 @@ public class StartRocket extends JPanel{
     //
     private boolean isRocketNearGates(){
         return rocket.y<(gates.topY+40);
+    }
+
+    //
+    private boolean isRocketFlewGates(){
+        return (rocket.y+rocket.height)>(gates.topY+40);
     }
 
 
