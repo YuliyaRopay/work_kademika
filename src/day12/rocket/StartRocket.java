@@ -41,6 +41,7 @@ public class StartRocket extends JPanel{
         startRocket();
 
         while(true){
+
             repaint();
             sleep(1000/60);
         }
@@ -152,7 +153,8 @@ public class StartRocket extends JPanel{
                 gates.bottomX--;
             }
             if(gates.topX==gates.closeTopX){
-                stopRocket=true;
+                //stopRocket=true;
+                //gates.isOpen=false;
             }
             sleep(25);
         }
@@ -162,7 +164,8 @@ public class StartRocket extends JPanel{
 
     //
     private void moveRocket() throws Exception{
-        while(rocket.y>=0){
+        //while(rocket.y>=0){
+        while(true){
             if(!gates.isOpen && isRocketNearGates()){
                 synchronized (gates){
                     gates.notify();
@@ -180,6 +183,12 @@ public class StartRocket extends JPanel{
 
             rocket.y--;
             sleep(5);
+
+            if(rocket.y+rocket.height<=0){
+                rocket.y=450;
+                rocket.x=260;
+                gates.isOpen=false;
+            }
         }
     }
 
